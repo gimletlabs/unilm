@@ -21,7 +21,6 @@ import torch
 import torch.distributed as dist
 import torch.nn as nn
 import torch.nn.functional as F
-from torchmetrics import Metric
 
 
 def bool_flag(s):
@@ -743,30 +742,6 @@ def write_result_to_jsonl(test_stats, result_file):
 def read_result_from_jsonl(result_file):
     with open(result_file, mode="r", encoding="utf-8") as reader:
         return json.load(reader)
-
-
-# The implementation code is from ViLT (https://github.com/dandelin/ViLT.git)
-class VQAScore(Metric):
-    def __init__(self, dist_sync_on_step=False):
-        super().__init__(dist_sync_on_step=dist_sync_on_step)
-        self.add_state("score", default=torch.tensor(0.0), dist_reduce_fx="sum")
-        self.add_state("total", default=torch.tensor(0.0), dist_reduce_fx="sum")
-
-    def update(self, logits, target):
-        logits, target = (
-            logits.detach().float().to(self.score.device),
-            target.detach().float().to(self.score.device),
-        )
-        logits = torch.max(logits, 1)[1]
-        one_hots = torch.zeros(*target.size()).to(target)
-        one_hots.scatter_(1, logits.view(-1, 1), 1)
-        scores = one_hots * target
-
-        self.score += scores.sum()
-        self.total += len(logits)
-
-    def compute(self):
-        return self.score / self.total
 
 
 class BertCaptioningLoss(nn.Module):
