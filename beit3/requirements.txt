@@ -8,7 +8,6 @@ numpy
 pytest
 requests
 einops
-tensorboardX
 scipy
 ftfy
 opencv-python

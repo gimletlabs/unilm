@@ -22,7 +22,6 @@ import torch.distributed as dist
 import torch.nn as nn
 import torch.nn.functional as F
 from torchmetrics import Metric
-from tensorboardX import SummaryWriter
 
 
 def bool_flag(s):
@@ -187,6 +186,8 @@ class MetricLogger(object):
 
 class TensorboardLogger(object):
     def __init__(self, log_dir):
+        # Removing this logic because TensorboardX is not compatible with newer libaries.
+        raise NotImplementedError()
         self.writer = SummaryWriter(logdir=log_dir)
         self.step = 0
 
