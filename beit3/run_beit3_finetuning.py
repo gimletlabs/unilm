@@ -201,10 +201,12 @@ def get_args():
 
     if known_args.enable_deepspeed:
         try:
-            import deepspeed
-            from deepspeed import DeepSpeedConfig
-            parser = deepspeed.add_config_arguments(parser)
-            ds_init = deepspeed.initialize
+            # deepspeed is not installed because of packaging issues.
+            raise NotImplementedError
+            # import deepspeed
+            # from deepspeed import DeepSpeedConfig
+            # parser = deepspeed.add_config_arguments(parser)
+            # ds_init = deepspeed.initialize
         except:
             print("Please 'pip install deepspeed==0.4.0'")
             exit(0)

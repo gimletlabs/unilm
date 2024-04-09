@@ -14,7 +14,6 @@ opencv-python
 sentencepiece
 pyarrow
 transformers
-deepspeed==0.4.0
 pycocotools
 pycocoevalcap
 torchscale-gml==0.2.1
