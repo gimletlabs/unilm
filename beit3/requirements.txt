@@ -10,7 +10,7 @@ requests
 einops
 scipy
 ftfy
-opencv-python
+opencv-python-headless
 sentencepiece
 pyarrow
 transformers
