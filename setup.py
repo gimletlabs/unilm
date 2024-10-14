@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="beit3-gml",
-    version="0.1.2",
+    version="0.1.3",
     author="Gimlet Labs",
     url="https://github.com/gimletlabs/unilm",
     license="MIT",
