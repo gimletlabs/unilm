@@ -16,4 +16,4 @@ pyarrow
 transformers
 pycocotools
 pycocoevalcap
-torchscale-gml==0.2.1
+torchscale-gml
